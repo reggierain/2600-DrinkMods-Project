@@ -1,0 +1,18 @@
+.react-container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.drinks-list {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2rem;
+}
+
+.drinks-list ul {
+    list-style-type: none;
+}
+
+.pending {
+    opacity: 0.5
+}
