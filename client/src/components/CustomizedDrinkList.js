@@ -23,12 +23,14 @@ const CustomizedDrinkList = (props) => {
             <ul>
                 {customizedDrinks.map((drink) => (
                     <li key={drink._id}>
-                        <button>{drink.name}</button>
+                        <button onClick={() => props.onSelect(drink, "customized")}>
+                            {drink.name}
+                        </button>
                     </li>
                 ))}
             </ul>
         </div>
     );
-}
+};
 
 export default CustomizedDrinkList;

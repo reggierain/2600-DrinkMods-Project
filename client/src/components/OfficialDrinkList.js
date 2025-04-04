@@ -23,7 +23,7 @@ const OfficialDrinkList = (props) => {
             <ul>
                 {officialDrinks.map((drink) => (
                     <li key={drink._id}>
-                        <button>{drink.name}</button>
+                        <button onClick={() => props.onSelect(drink, "official")}>{drink.name}</button>
                     </li>
                 ))}
             </ul>
