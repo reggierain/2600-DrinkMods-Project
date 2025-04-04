@@ -20,13 +20,17 @@ const CustomizedDrinkForm = (props) => {
             };
 
             try {
-                await fetch("/api/v1/customizedDrinks", {
+                const res = await fetch("/api/v1/customizedDrinks", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify(drink),
                 });
+                if (res.status === 400) {
+                    setStatus("error");
+                    return "error";
+                }
                 setName("");
                 setSize("");
                 setUserName("");
@@ -60,10 +64,18 @@ const CustomizedDrinkForm = (props) => {
         setStatus("unsubmitted");
     }, [name, size, userName]);
 
+    useEffect(() => {
+        if (props.clearMessage) {
+            setStatus("unsubmitted");
+        }
+    }, [props.clearMessage]);
+
     return (
         <div>
             <fieldset>
-                <legend><h4>Have a drink in mind? Post it!</h4></legend>
+                <legend>
+                    <h4>Have a drink in mind? Post it!</h4>
+                </legend>
                 <form
                     action={submitAction}
                     className={pending ? "pending" : ""}
@@ -146,7 +158,10 @@ const CustomizedDrinkForm = (props) => {
                         Submit Drink
                     </button>
                     {status === "success" && (
-                        <p>Submitted! Thank you for your contribution.</p>
+                        <p style={{color: "green"}}>Submitted! Thank you for your contribution.</p>
+                    )}
+                    {status === "error" && (
+                        <p style={{color: "red"}}>Error. All fields must be filled.</p>
                     )}
                 </form>
             </fieldset>

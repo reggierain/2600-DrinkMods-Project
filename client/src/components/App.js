@@ -30,6 +30,8 @@ const App = (props) => {
         setSelectType("");
     };
 
+    // I also have this get customized drinks here because I couldnt find a way out on how to re-update the list
+    // after adding a new drink to display the newly added drink
     const getCustomizedDrinks = async () => {
         try {
             const res = await fetch("/api/v1/customizedDrinks");
@@ -61,7 +63,7 @@ const App = (props) => {
                     <CustomizedDrinkList onSelect={showIngredients} drinks={customizedDrinks} />
                 </div>
             )}
-            <CustomizedDrinkForm onSubmitSuccess={getCustomizedDrinks}/>
+            <CustomizedDrinkForm onSubmitSuccess={getCustomizedDrinks} clearMessage={selectDrink}/>
         </div>
     );
 };

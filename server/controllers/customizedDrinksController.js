@@ -20,7 +20,8 @@ const addCustomizedDrink = (req, res) => {
         !drink.name ||
         !drink.size ||
         drink.ingredients.length === 0 ||
-        !drink.userName
+        !drink.userName ||
+        drink.ingredients.some(nth => !nth.name || !nth.amount)
     ) {
         return res.status(400).send("Error: All fields must be filled.");
     }
@@ -47,7 +48,6 @@ const addCustomizedDrink = (req, res) => {
 };
 
 const increaseClickCount = (req, res) => {
-    // increase the click count when clicked/viewed
     const id = req.params.id;
 
     database

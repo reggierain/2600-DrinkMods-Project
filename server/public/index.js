@@ -16132,6 +16132,8 @@ const App = (props)=>{
         setSelectDrink(null);
         setSelectType("");
     };
+    // I also have this get customized drinks here because I couldnt find a way out on how to re-update the list
+    // after adding a new drink to display the newly added drink
     const getCustomizedDrinks = async ()=>{
         try {
             const res = await fetch("/api/v1/customizedDrinks");
@@ -16151,19 +16153,19 @@ const App = (props)=>{
                 children: "DrinkMods"
             }, void 0, false, {
                 fileName: "src/components/App.js",
-                lineNumber: 49,
+                lineNumber: 51,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h3", {
                 children: "Your favorite Starbucks drinks in one place."
             }, void 0, false, {
                 fileName: "src/components/App.js",
-                lineNumber: 50,
+                lineNumber: 52,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
                 fileName: "src/components/App.js",
-                lineNumber: 51,
+                lineNumber: 53,
                 columnNumber: 13
             }, undefined),
             selectDrink ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _drinkIngredientsJsDefault.default), {
@@ -16172,7 +16174,7 @@ const App = (props)=>{
                 back: goBack
             }, void 0, false, {
                 fileName: "src/components/App.js",
-                lineNumber: 53,
+                lineNumber: 55,
                 columnNumber: 17
             }, undefined) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "drinks-list",
@@ -16181,7 +16183,7 @@ const App = (props)=>{
                         onSelect: showIngredients
                     }, void 0, false, {
                         fileName: "src/components/App.js",
-                        lineNumber: 60,
+                        lineNumber: 62,
                         columnNumber: 21
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _customizedDrinkListJsDefault.default), {
@@ -16189,26 +16191,27 @@ const App = (props)=>{
                         drinks: customizedDrinks
                     }, void 0, false, {
                         fileName: "src/components/App.js",
-                        lineNumber: 61,
+                        lineNumber: 63,
                         columnNumber: 21
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/App.js",
-                lineNumber: 59,
+                lineNumber: 61,
                 columnNumber: 17
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _customizedDrinkFormJsDefault.default), {
-                onSubmitSuccess: getCustomizedDrinks
+                onSubmitSuccess: getCustomizedDrinks,
+                clearMessage: selectDrink
             }, void 0, false, {
                 fileName: "src/components/App.js",
-                lineNumber: 64,
+                lineNumber: 66,
                 columnNumber: 13
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/App.js",
-        lineNumber: 48,
+        lineNumber: 50,
         columnNumber: 9
     }, undefined);
 };
@@ -18642,13 +18645,17 @@ const CustomizedDrinkForm = (props)=>{
                 }))
         };
         try {
-            await fetch("/api/v1/customizedDrinks", {
+            const res = await fetch("/api/v1/customizedDrinks", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(drink)
             });
+            if (res.status === 400) {
+                setStatus("error");
+                return "error";
+            }
             setName("");
             setSize("");
             setUserName("");
@@ -18691,6 +18698,11 @@ const CustomizedDrinkForm = (props)=>{
         size,
         userName
     ]);
+    (0, _react.useEffect)(()=>{
+        if (props.clearMessage) setStatus("unsubmitted");
+    }, [
+        props.clearMessage
+    ]);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("fieldset", {
             children: [
@@ -18699,12 +18711,12 @@ const CustomizedDrinkForm = (props)=>{
                         children: "Have a drink in mind? Post it!"
                     }, void 0, false, {
                         fileName: "src/components/CustomizedDrinkForm.js",
-                        lineNumber: 66,
-                        columnNumber: 25
+                        lineNumber: 77,
+                        columnNumber: 21
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/CustomizedDrinkForm.js",
-                    lineNumber: 66,
+                    lineNumber: 76,
                     columnNumber: 17
                 }, undefined),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -18715,7 +18727,7 @@ const CustomizedDrinkForm = (props)=>{
                             children: "Name: "
                         }, void 0, false, {
                             fileName: "src/components/CustomizedDrinkForm.js",
-                            lineNumber: 71,
+                            lineNumber: 83,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -18726,19 +18738,19 @@ const CustomizedDrinkForm = (props)=>{
                             disabled: pending
                         }, void 0, false, {
                             fileName: "src/components/CustomizedDrinkForm.js",
-                            lineNumber: 72,
+                            lineNumber: 84,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                             fileName: "src/components/CustomizedDrinkForm.js",
-                            lineNumber: 79,
+                            lineNumber: 91,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
                             children: "Size: "
                         }, void 0, false, {
                             fileName: "src/components/CustomizedDrinkForm.js",
-                            lineNumber: 80,
+                            lineNumber: 92,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -18749,19 +18761,19 @@ const CustomizedDrinkForm = (props)=>{
                             disabled: pending
                         }, void 0, false, {
                             fileName: "src/components/CustomizedDrinkForm.js",
-                            lineNumber: 81,
+                            lineNumber: 93,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                             fileName: "src/components/CustomizedDrinkForm.js",
-                            lineNumber: 88,
+                            lineNumber: 100,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
                             children: "User's Name: "
                         }, void 0, false, {
                             fileName: "src/components/CustomizedDrinkForm.js",
-                            lineNumber: 89,
+                            lineNumber: 101,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -18772,12 +18784,12 @@ const CustomizedDrinkForm = (props)=>{
                             disabled: pending
                         }, void 0, false, {
                             fileName: "src/components/CustomizedDrinkForm.js",
-                            lineNumber: 90,
+                            lineNumber: 102,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                             fileName: "src/components/CustomizedDrinkForm.js",
-                            lineNumber: 97,
+                            lineNumber: 109,
                             columnNumber: 21
                         }, undefined),
                         ingredients.map((nth, index)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18792,19 +18804,19 @@ const CustomizedDrinkForm = (props)=>{
                                         ]
                                     }, void 0, true, {
                                         fileName: "src/components/CustomizedDrinkForm.js",
-                                        lineNumber: 105,
+                                        lineNumber: 117,
                                         columnNumber: 29
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                         fileName: "src/components/CustomizedDrinkForm.js",
-                                        lineNumber: 106,
+                                        lineNumber: 118,
                                         columnNumber: 29
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
                                         children: "Ingredient Name: "
                                     }, void 0, false, {
                                         fileName: "src/components/CustomizedDrinkForm.js",
-                                        lineNumber: 107,
+                                        lineNumber: 119,
                                         columnNumber: 29
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -18814,19 +18826,19 @@ const CustomizedDrinkForm = (props)=>{
                                         disabled: pending
                                     }, void 0, false, {
                                         fileName: "src/components/CustomizedDrinkForm.js",
-                                        lineNumber: 108,
+                                        lineNumber: 120,
                                         columnNumber: 29
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                         fileName: "src/components/CustomizedDrinkForm.js",
-                                        lineNumber: 120,
+                                        lineNumber: 132,
                                         columnNumber: 29
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
                                         children: "Amount: "
                                     }, void 0, false, {
                                         fileName: "src/components/CustomizedDrinkForm.js",
-                                        lineNumber: 121,
+                                        lineNumber: 133,
                                         columnNumber: 29
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
@@ -18837,13 +18849,13 @@ const CustomizedDrinkForm = (props)=>{
                                         disabled: pending
                                     }, void 0, false, {
                                         fileName: "src/components/CustomizedDrinkForm.js",
-                                        lineNumber: 122,
+                                        lineNumber: 134,
                                         columnNumber: 29
                                     }, undefined)
                                 ]
                             }, index, true, {
                                 fileName: "src/components/CustomizedDrinkForm.js",
-                                lineNumber: 99,
+                                lineNumber: 111,
                                 columnNumber: 25
                             }, undefined)),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -18853,12 +18865,12 @@ const CustomizedDrinkForm = (props)=>{
                             children: "Add Ingredient"
                         }, void 0, false, {
                             fileName: "src/components/CustomizedDrinkForm.js",
-                            lineNumber: 137,
+                            lineNumber: 149,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                             fileName: "src/components/CustomizedDrinkForm.js",
-                            lineNumber: 144,
+                            lineNumber: 156,
                             columnNumber: 21
                         }, undefined),
                         /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -18867,35 +18879,48 @@ const CustomizedDrinkForm = (props)=>{
                             children: "Submit Drink"
                         }, void 0, false, {
                             fileName: "src/components/CustomizedDrinkForm.js",
-                            lineNumber: 145,
+                            lineNumber: 157,
                             columnNumber: 21
                         }, undefined),
                         status === "success" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                            style: {
+                                color: "green"
+                            },
                             children: "Submitted! Thank you for your contribution."
                         }, void 0, false, {
                             fileName: "src/components/CustomizedDrinkForm.js",
-                            lineNumber: 149,
+                            lineNumber: 161,
+                            columnNumber: 25
+                        }, undefined),
+                        status === "error" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                            style: {
+                                color: "red"
+                            },
+                            children: "Error. All fields must be filled."
+                        }, void 0, false, {
+                            fileName: "src/components/CustomizedDrinkForm.js",
+                            lineNumber: 164,
                             columnNumber: 25
                         }, undefined)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/CustomizedDrinkForm.js",
-                    lineNumber: 67,
+                    lineNumber: 79,
                     columnNumber: 17
                 }, undefined)
             ]
         }, void 0, true, {
             fileName: "src/components/CustomizedDrinkForm.js",
-            lineNumber: 65,
+            lineNumber: 75,
             columnNumber: 13
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/CustomizedDrinkForm.js",
-        lineNumber: 64,
+        lineNumber: 74,
         columnNumber: 9
     }, undefined);
 };
-_s(CustomizedDrinkForm, "fPee0FB1KjDP3HYXMEYl+yUYxkU=", false, function() {
+_s(CustomizedDrinkForm, "YWhsOkyMWc/drIhHfD6y8Ea0NJM=", false, function() {
     return [
         (0, _react.useActionState)
     ];
