@@ -39,7 +39,7 @@ const addCustomizedDrink = (req, res) => {
     database
         .collection("customizedDrinks")
         .insertOne(formattedDrink)
-        .then(() => res.send("Success: Customized drink inserted"))
+        .then(() => res.send("Success"))
         .catch((e) => {
             console.dir(e, { depth: null });
             res.status(500).send("Error");
