@@ -1,27 +1,15 @@
 import { useState, useEffect } from "react";
 
 const CustomizedDrinkList = (props) => {
-    const [customizedDrinks, setCustomizedDrinks] = useState([]);
-
-    const getCustomizedDrinks = async () => {
-        try {
-            const res = await fetch("/api/v1/customizedDrinks");
-            const data = await res.json();
-            setCustomizedDrinks(data);
-        } catch (e) {
-            console.log(e);
-        }
-    };
-
-    useEffect(() => {
-        getCustomizedDrinks();
-    }, []);
-
     return (
         <div>
             <h3>Customized Drinks</h3>
             <ul>
-                {customizedDrinks.map((drink) => (
+                {props.drinks.map((drink) => (
+                    // for this project, i only list the pcustomized drinks and not only listed the top 5
+                    // the reason is i only have entered a few drinks so far
+                    // it will be needing some kind of function like either search, recently added, or best drinks
+                    // with more data.
                     <li key={drink._id}>
                         <button onClick={() => props.onSelect(drink, "customized")}>
                             {drink.name}

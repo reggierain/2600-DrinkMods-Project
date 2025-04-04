@@ -32,6 +32,9 @@ const CustomizedDrinkForm = (props) => {
                 setUserName("");
                 setIngredients([{ name: "", amount: "" }]);
                 setStatus("success");
+                if (props.onSubmitSuccess) {
+                    props.onSubmitSuccess();
+                }
                 return "submitted";
             } catch (e) {
                 console.log(e);
@@ -60,7 +63,9 @@ const CustomizedDrinkForm = (props) => {
     return (
         <div>
             <fieldset>
-                <legend><h4>Have a drink in mind? Post it!</h4></legend>
+                <legend>
+                    <h4>Have a drink in mind? Post it!</h4>
+                </legend>
                 <form
                     action={submitAction}
                     className={pending ? "pending" : ""}
@@ -142,9 +147,11 @@ const CustomizedDrinkForm = (props) => {
                     <button type="submit" disabled={pending}>
                         Submit Drink
                     </button>
-                    {status === "success" && (
-                        <p>Submitted! Thank you for your contribution.</p>
-                    )}
+                    {status === "success" ? (
+                        <p style={{ color: "green" }}>Submitted! Thank you for your contribution.</p>
+                    ) : status === "error" ? (
+                        <p style={{ color: "red" }}>{error}</p>
+                    ) : null}
                 </form>
             </fieldset>
         </div>

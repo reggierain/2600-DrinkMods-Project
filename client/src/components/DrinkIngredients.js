@@ -26,7 +26,7 @@ const DrinkIngredients = ({ drink, type, back }) => {
                             <li key={i}>{item.amount} {item.name}</li>
                         ))}
                     </ul>
-                    <p><em>User:</em> {drink.creatorName}</p>
+                    <p><em>User:</em> {drink.userName}</p>
                     <p><em>Clicks:</em> {drink.clicks}</p>
                 </div>
             )}

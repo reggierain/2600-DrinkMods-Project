@@ -48,6 +48,21 @@ const addCustomizedDrink = (req, res) => {
 
 const increaseClickCount = (req, res) => {
     // increase the click count when clicked/viewed
+    const id = req.params.id;
+
+    database
+        .collection("customizedDrinks")
+        .updateOne({ _id: mongodb.ObjectId(id) }, { $inc: { clicks: 1 } })
+        .then((result) => {
+            if (result.modifiedCount === 0) {
+                return res.status(404).send("Error: Drink not found.");
+            }
+            res.send("Success: Click count increased.");
+        })
+        .catch((e) => {
+            console.dir(e, { depth: null });
+            res.status(500).send("Error");
+        });
 };
 
 export { getAllCustomizedDrinks, addCustomizedDrink, increaseClickCount };
