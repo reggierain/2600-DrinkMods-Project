@@ -17,7 +17,7 @@ const App = (props) => {
                 });
                 drink.clicks += 1;
             } catch (e) {
-                console.log("Error increasing click count:", e);
+                console.log(e);
             }
         }
 

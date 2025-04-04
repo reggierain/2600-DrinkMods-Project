@@ -52,7 +52,7 @@ const increaseClickCount = (req, res) => {
 
     database
         .collection("customizedDrinks")
-        .updateOne({ _id: mongodb.ObjectId(id) }, { $inc: { clicks: 1 } })
+        .updateOne({ _id: new mongodb.ObjectId(id) }, { $inc: { clicks: 1 } })
         .then((result) => {
             if (result.modifiedCount === 0) {
                 return res.status(404).send("Error: Drink not found.");
