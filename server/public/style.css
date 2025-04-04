@@ -1,19 +1,2 @@
-.react-container {
-  width: 50%;
-  margin: 0 auto;
-}
-
-.drinks-list {
-  justify-content: space-evenly;
-  gap: 2rem;
-  display: flex;
-}
-
-.drinks-list ul {
-  list-style-type: none;
-}
-
-.pending {
-  opacity: .5;
-}
+.react-container{width:50%;margin:0 auto}.drinks-list{justify-content:space-evenly;gap:2rem;display:flex}.drinks-list ul{list-style-type:none}.pending{opacity:.5}
 /*# sourceMappingURL=style.css.map */
